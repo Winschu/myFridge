@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\section{Kurzvorstellung}
+
+\begin{center}
+Wir stellen vor: \textbf{MyFridge}
+\end{center}
+
+\begin{flushleft}
+MyFridge soll eine eine Datenbank gebundene Anwendung für den demographisch angepassten Endbenutzer werden, welcher von der Synergie seiner mobilen Endgeräte in Zusammenkunft seines Kühlschranks profitieren will.
+\end{flushleft}
+
+\section{Anforderungen}
+
+\begin{itemize}
+\item[•] Als Benutzer will ich wissen was im Kühlschrank ist
+\item[•] Als Benutzer will ich meine Einkäufe eintragen können
+\item[•] Als Benutzer will ich aus meinen Waren Rezepte zusammen stellen
+\item[•] Als Benutzer will ich Rezepte vorgeschlagen bekommen
+\item[•] Als Benutzer will ich die besten Angebote für fehlende Zutaten bekommen
+\end{itemize}
+
+\section{Benötigte Daten}
+
+\begin{flushleft}
+
+Um die Grundfunktionen anbieten zu können, sollten zu jeder Artikelgruppe ein paar Platzhalter-Artikel vorhanden sein welche dann mit Artikeln aus der realen Welt ersetzt werden können. Im Normalfall sollte es darum auch reichen wenn ein Benutzer einen neuen Artikel anlegt, diesen jeder andere Benutzer auch benutzen kann.
+
+\subsection{Barcodes}
+
+Da seit einiger Zeit schon Artikel über einen Barcode eindeutig identifiziert werden können, ist diese Art von Datensatz besonders wichtig für uns. Genauer handelt es sich in diesem Fall um die GTIN (Global Trade Item Number), diese wird umgangssprachlich meist einfach nur EAN genannt, was theoretisch auch richtig ist. Hier handelt es sich aber um die European Articel Number welche vom Syntax her aber auch komplett gleich ist. Die GTIN ist einfach nur der Oberbegriff.
+
+\subsection{Dubletten vermeiden}
+
+Da es leider noch keine eingebauten RFID-Chips in jedem Produkt gibt, müssen wir uns deswegen damit begnügen. Jedoch kann auch ein Produkt bzw. Artikel mehrere GTIN-Einträge haben, dies kann dadurch passieren dass der Hersteller die Verpackungsgrößen ändert oder die Inhaltsstoffe ändert. So bekommt der Konsument aber auch recht schnell mit dass es sich um ein neues Produkt handelt. Glücklicherweise kann man Sachen wie dass Herkunftsland und das Unternehmen welches diesen Barcode gekauft hat diesem entnehmen. Dadurch kann dem Benutzer ein Artikel vorgeschlagen werden welcher ähnlich dem seinem ist, jedoch nicht der gleiche sondern eine wohl möglich veraltete Version davon.
+
+\subsection{Frühjahresputz}
+
+Damit die Datenbank nicht mit ungenutzten Artikeln überquillt sollten diese gelöscht werden sobald sie ein Jahr lang nicht mehr abgerufen worden sind. Um sie dennoch zu erhalten könnten sie dann aber auch einfach in eine historische Datenbank hinüber kopiert werden welche jedoch nicht mit dem produktivem System verbunden ist.
+
+\subsection{Vorschläge auf Basis der Gewöhnung}
+
+Falls ein Artikel öfters eingetragen wird, sollte dass System dies merken können. Falls dann das nächste mal ein Einkaufszettel erstellt werden soll, kann somit automatisch vorgeschlagen werden, dass dieser Artikel doch auch mit auf die Liste kommen könnte.
+
+\subsection{Verbindung mit anderen Diensten}
+
+Rein theoretisch wäre natürlich noch eine Kombination mit den Diensten eines Online Kochrezepte Anbieter möglich. Da deren Zutatenlisten jedoch niemals einem bestimmten Syntax folgen und auch oftmals verschiedene Bezeichnungen für ein und die selbe Zutat führen. Ist dass ganze jedoch eher schwierig. Deswegen steht es zur Frage ob wir dass ganze auch überhaupt implementieren sollten.
+
+\end{flushleft}
+
+\end{document}
