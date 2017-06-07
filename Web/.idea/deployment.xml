@@ -2,14 +2,7 @@
 <project version="4">
   <component name="PublishConfigData" showEqualInSync="true">
     <serverData>
-      <paths name="Alobar">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="BetaVille">
+      <paths name="ALOBAR">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

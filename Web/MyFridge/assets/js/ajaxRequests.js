@@ -1,5 +1,5 @@
 function loadAllArticles() {
-    $.get("includes/ajax/getAllArticles.php").done(function (data) {
+    $.post("includes/ajax/getAllArticles.php", {startPos : 0, rowCount : 5}).done(function (data) {
         sessionStorage.setItem("allArticles", JSON.stringify(data));
     });
 }

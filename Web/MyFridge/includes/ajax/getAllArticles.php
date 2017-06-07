@@ -1,10 +1,16 @@
 <?php
 header('Content-type: application/json; charset=utf-8');
 
-$con = "host=vps2.white-it.net port=5432 dbname=myfridge user=mbandowski password=TI/%ERebo8ifg8ib6";
-$pgCon = pg_connect($con);
+require_once("../dbCredentials.php");
+
+$dbCon = new dbCredentials();
+
+$startPos = $_POST["startPos"];
+$rowCount = $_POST["rowCount"];
+
+$pgCon = pg_connect($dbCon->getDBString());
 $returnValue = [];
-$result = pg_query($pgCon, "SELECT * FROM article");
+$result = pg_query($pgCon, "SELECT * FROM article ORDER BY name ASC LIMIT $rowCount");
 if (!$result) {
     echo "Ein Fehler ist aufgetreten.\n";
     exit;

@@ -1,12 +1,11 @@
-<?php require_once("includes/dbConfig.php"); ?>
 <?php require_once("includes/loadAssets.html"); ?>
 <html>
 <head>
     <script>
         $(document).ready(function () {
+            console.log(<?php $dbString ?>);
             loadAllArticles();
-            var a = getAllArticles();
-            fillAllArticlesList(a);
+            fillAllArticlesList(getAllArticles());
         });
     </script>
     <title>Home</title>
@@ -19,9 +18,7 @@
             Willkommen!
         </h2>
         <div class="card-text">
-            <div class="d-flex flex-wrap justify-content-around" id="allArticlesTextBox">
-
-            </div>
+            <div class="d-flex flex-wrap justify-content-around" id="allArticlesTextBox"></div>
         </div>
     </div>
 </div>
