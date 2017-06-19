@@ -19,12 +19,13 @@ function createBlock(a) {
 }
 
 function fillAllArticlesList(a) {
+    var s = "";
     for (var i = 0; i < a.length; i++) {
-        var s = "";
         s += "<div class='card text-center'>";
         s += createBlock(a[i].name);
         s += createBlock(a[i].groupName);
         s += "</div>";
-        $("#allArticlesTextBox").append(s);
     }
+
+    return s;
 }
