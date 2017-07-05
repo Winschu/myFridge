@@ -9,6 +9,12 @@ function getAllArticles() {
     return JSON.parse(obj);
 }
 
+function getSpecificUser(userName) {
+    $.post("includes/ajay/getSpecificUser.php", {userName : userName}).done(function (data) {
+        //TODO: Irgendwas übergeben lassen
+    });
+}
+
 function createBlock(a) {
     var s = "";
     s += "<div>";
