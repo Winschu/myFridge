@@ -1,7 +1,15 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Marcel
- * Date: 19.06.2017
- * Time: 14:57
- */
+<?php require_once("includes/loadAssets.html"); ?>
+<html>
+<head>
+    <script>
+    </script>
+    <title>Einstellungen</title>
+    <?php require_once("includes/loadNavbar.html"); ?>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="card">
+    </div>
+</div>
+</body>
+</html>
