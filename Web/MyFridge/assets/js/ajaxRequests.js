@@ -10,8 +10,15 @@ function getAllArticles() {
 }
 
 function getSpecificUser(userName) {
-    $.post("includes/ajay/getSpecificUser.php", {userName : userName}).done(function (data) {
+    $.post("includes/ajax/getSpecificUser.php", {userName : userName}).done(function (data) {
         //TODO: Irgendwas übergeben lassen
+    });
+}
+
+function getAllArticlesByProducer(producerName)
+{
+    $.post("includes/ajax/getAllArticlesByProducer.php", {producerName : producerName}).done(function (data) {
+       //TODO: Irgendwas übergeben lassen
     });
 }
 
