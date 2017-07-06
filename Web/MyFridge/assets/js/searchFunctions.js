@@ -25,18 +25,36 @@ function getSearchResult (searchTerm, startPos, rowCount) {
 function createListItem(articleItem) {
     var s = "";
 
+    JsBarcode(".barcode").init();
+
     s += "<div class='card'>";
     s += "<div class='card-block'>";
     s += "<div class='d-flex flex-wrap justify-content-between'>";
+
     s += "<div class='p-6'>";
     s += articleItem.name + " (" + articleItem.producerName + ")";
+
+    s += "<div class='d-flex flex-wrap justify-content-between'>";
+    s += "<div class='p-6'>";
+    s += articleItem.highestPrice;
     s += "</div>";
     s += "<div class='p-6'>";
-    s += articleItem.barcode;
+    s += articleItem.size + articleItem.sizeType;
     s += "</div>";
+    s += "</div>";
+
+    s += "</div>";
+
+
+
+    s += "<div class='p-6'>";
+    s += "<svg class='barcode' jsbarcode-height='20' jsbarcode-format='EAN13' jsbarcode-value='" + articleItem.barcode + "' jsbarcode-textmargin='0' jsbarcode-fontoptions='bold'></svg>";
+    s += "</div>";
+
     s += "</div>";
     s += "</div>";
     s += "</div>";
 
+    JsBarcode(".barcode").init();
     return s;
 }
