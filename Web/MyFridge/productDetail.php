@@ -8,7 +8,7 @@ require_once("includes/articleObject.php");
     <script>
 
     </script>
-    <title>Home</title>
+    <title>Artikel</title>
     <?php require_once("includes/loadNavbar.html"); ?>
     <?php
     $article = null;

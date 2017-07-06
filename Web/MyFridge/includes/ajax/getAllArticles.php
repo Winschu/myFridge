@@ -5,12 +5,18 @@ require_once("../dbCredentials.php");
 
 $dbCon = new dbCredentials();
 
+if(isset($_POST["searchTerm"])) {
+    $searchTerm = $_POST["searchTerm"];
+}
+else{
+    $searchTerm = "%%";
+}
 $startPos = $_POST["startPos"];
 $rowCount = $_POST["rowCount"];
 
 $pgCon = pg_connect($dbCon->getDBString());
 $returnValue = [];
-$result = pg_query($pgCon, "SELECT * FROM article ORDER BY name ASC LIMIT $rowCount");
+$result = pg_query($pgCon, "SELECT * FROM article WHERE name LIKE '%$searchTerm%' ORDER BY name ASC LIMIT $rowCount");
 if (!$result) {
     echo "Ein Fehler ist aufgetreten.\n";
     exit;

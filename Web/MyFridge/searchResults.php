@@ -1,9 +1,13 @@
-<?php require_once("includes/loadAssets.html"); ?>
+<?php
+require_once("includes/loadAssets.html");
+require_once("includes/articleObject.php");
+?>
 <html>
 <head>
     <script>
         $(document).ready(function () {
-            $("#allArticlesTextBox").html(fillAllArticlesList(getAllArticles()));
+            var searchTerm = "<?php echo $_GET["searchInput"]; ?>";
+            getSearchResult(searchTerm, 0, 30);
         });
     </script>
     <title>Home</title>
@@ -16,7 +20,7 @@
             Suchergebnisse
         </h2>
         <div class="card-text">
-            <div class="d-flex flex-wrap justify-content-around" id="allArticlesTextBox"></div>
+            <div id="articleList"></div>
         </div>
     </div>
 </div>
