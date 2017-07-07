@@ -1,6 +1,5 @@
 <?php
 require_once("includes/loadAssets.html");
-require_once("includes/articleObject.php");
 //TODO: Abfrage ob Nutzer schon registriert oder bereits angemeldet ist
 ?>
 <html>
