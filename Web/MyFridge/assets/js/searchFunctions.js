@@ -3,6 +3,9 @@ var articleArray = [];
 var articleGroupArray = [];
 var producerArray = [];
 
+/*
+ * Gibt Suchergebnisse die auf den Suchbegriff passen zurück und grenzt die Ausgabe auf die gegebenen Parameter ein
+ */
 function getSearchResult (searchTerm, startPos, rowCount) {
     $.post("../../includes/ajax/getAllArticles.php", {searchTerm : searchTerm, startPos : startPos, rowCount : rowCount}).done(function (data) {
        for(var i = 0; i < data.length; i++) {
@@ -24,6 +27,72 @@ function getSearchResult (searchTerm, startPos, rowCount) {
     });
 }
 
+/*
+ * Gibt alle Artikelgruppen in der Datenbank zurück
+ */
+function getArticleGroupList() {
+    $.get("../../includes/ajax/getAllArticleGroup.php").done(function (data) {
+        for(var i = 0; i < data.length; i++) {
+            var articleGroup = {
+                name : data[i].name
+            };
+            articleGroupArray.push(articleGroup);
+        }
+        for(var j = 0; j < articleGroupArray.length; j++) {
+            $("#articleGroupSelect").append(createSelectOption(articleGroupArray[j].name));
+        }
+    });
+}
+
+/*
+ * Gibt alle Hersteller in der Datenbank zurück
+ */
+function getProducerNameList() {
+    $.get("../../includes/ajax/getAllProducer.php").done(function (data) {
+        for(var i = 0; i < data.length; i++) {
+            var producer = {
+                name : data[i].name
+            };
+            producerArray.push(producer);
+        }
+        for(var j = 0; j < producerArray.length; j++) {
+            $("#producerNameSelect").append(createSelectOption(producerArray[j].name));
+        }
+    });
+}
+
+/*
+ * Gibt Benutzer mit gegebenem Benutzernamen zurück
+ */
+function getSpecificUser(userName) {
+    $.post("includes/ajax/getSpecificUser.php", {userName : userName}).done(function (data) {
+        //TODO: Irgendwas übergeben lassen
+    });
+}
+
+/*
+ * Gibt alle Artikel eines Herstellers zurück
+ */
+function getAllArticlesByProducer(producerName) {
+    $.post("includes/ajax/getAllArticlesByProducer.php", {producerName : producerName}).done(function (data) {
+        //TODO: Irgendwas übergeben lassen
+    });
+}
+
+/*
+ * Abgekürzte Funktion zur Erstellung einer Auswahloption mit gleichem Wert und Anzeigetext
+ */
+function createSelectOption(d) {
+    var s = "";
+
+    s += "<option value='" + d + "'>" + d + "</option>";
+
+    return s;
+}
+
+/*
+ * Listeneintrag für die Ausgabe der Suche erstellen
+ */
 function createListItem(articleItem) {
     var s = "";
 
@@ -73,42 +142,6 @@ function escapeHtml(text) {
     var s = text;
 
     s.replace("&", "||");
-
-    return s;
-}
-
-function getArticleGroupList() {
-    $.get("../../includes/ajax/getAllArticleGroup.php").done(function (data) {
-        for(var i = 0; i < data.length; i++) {
-            var articleGroup = {
-                name : data[i].name
-            };
-            articleGroupArray.push(articleGroup);
-        }
-        for(var j = 0; j < articleGroupArray.length; j++) {
-            $("#articleGroupSelect").append(createSelectOption(articleGroupArray[j].name));
-        }
-    });
-}
-
-function getProducerNameList() {
-    $.get("../../includes/ajax/getAllProducer.php").done(function (data) {
-        for(var i = 0; i < data.length; i++) {
-            var producer = {
-                name : data[i].name
-            };
-            producerArray.push(producer);
-        }
-        for(var j = 0; j < producerArray.length; j++) {
-            $("#producerNameSelect").append(createSelectOption(producerArray[j].name));
-        }
-    });
-}
-
-function createSelectOption(d) {
-    var s = "";
-
-    s += "<option value='" + d + "'>" + d + "</option>";
 
     return s;
 }
