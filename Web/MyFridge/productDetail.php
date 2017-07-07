@@ -13,6 +13,8 @@ require_once("includes/articleObject.php");
     <?php
     $article = null;
     $articleName = $_GET["articleName"];
+    $articleName = str_replace("%20", " ", $articleName);
+    echo $articleName;
     $dbCon = new dbCredentials();
     $pgCon = pg_connect($dbCon->getDBString());
     $result = pg_query($pgCon, "
@@ -20,6 +22,10 @@ SELECT name, group_name, barcode, highest_price, producer_name, size, size_type,
 FROM article
 WHERE name = '$articleName'
 ");
+    if (!$result) {
+        echo "Ein Fehler ist aufgetreten.\n";
+        exit;
+    }
     while ($data = pg_fetch_object($result)) {
         $article = new articleObject($data);
     }

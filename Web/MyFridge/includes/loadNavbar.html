@@ -2,7 +2,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">MyFridge</a>
+    <a class="navbar-brand" href="/index.php">MyFridge</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
@@ -10,16 +10,16 @@
                 <a class="nav-link" href="#"><i class="fa fa-list-alt"></i>&nbsp;Mein Inventar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Meine Daten</a>
+                <a class="nav-link" href="/userData.php">Meine Daten</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Hersteller</a>
+                <a class="nav-link" href="/producerList.php">Hersteller</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Einstellungen</a>
+                <a class="nav-link" href="/userSettings.php">Einstellungen</a>
             </li>
             <form class="form-inline my-2 my-lg-0" action="../searchResults.php"
-                  method="get" id="searchForm" name="searchForm">
+                  method="post" id="searchForm" name="searchForm">
                 <input class="form-control mr-sm-2" name="searchInput" id="searchInput" type="text" placeholder="Suche...">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Suche</button>
             </form>

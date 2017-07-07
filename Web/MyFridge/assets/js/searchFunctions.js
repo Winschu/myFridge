@@ -22,6 +22,18 @@ function getSearchResult (searchTerm, startPos, rowCount) {
     });
 }
 
+/*
+ * Author: Kip @ StackOverflow
+ */
+function escapeHtml(text) {
+
+    var s = text;
+
+    s.replace("&", "||");
+
+    return s;
+}
+
 function createListItem(articleItem) {
     var s = "";
 
@@ -31,8 +43,12 @@ function createListItem(articleItem) {
     s += "<div class='card-block'>";
     s += "<div class='d-flex flex-wrap justify-content-between'>";
 
+    //Main box
     s += "<div class='p-6'>";
-    s += articleItem.name + " (" + articleItem.producerName + ")";
+    //TODO: Möglichkeit finden den String besser übertragbar zu machen
+    s += "<a href='productDetail.php?articleName=" +  escapeHtml(articleItem.name) + "'>" + articleItem.name + "</a>";
+
+    s += " (" + articleItem.producerName + ")";
 
     s += "<div class='d-flex flex-wrap justify-content-between'>";
     s += "<div class='p-6'>";
@@ -44,9 +60,9 @@ function createListItem(articleItem) {
     s += "</div>";
 
     s += "</div>";
+    //end of Main box
 
-
-
+    //Barcode
     s += "<div class='p-6'>";
     s += "<svg class='barcode' jsbarcode-height='20' jsbarcode-format='EAN13' jsbarcode-value='" + articleItem.barcode + "' jsbarcode-textmargin='0' jsbarcode-fontoptions='bold'></svg>";
     s += "</div>";
