@@ -25,11 +25,11 @@
                         <span>Persönliche Maße ändern</span>
                         <div class="p-6">
                             <span id="userSizeText">SIZE</span>
-                            <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Größe eintragen...">
+                            <input type="number" class="form-control" id="sizeInput" placeholder="Größe eintragen...">
                         </div>
                         <div class="p-6">
                             <span id="userWeightText">WEIGHT</span>
-                            <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Gewicht eintragen">
+                            <input type="number" class="form-control" id="weightInput" placeholder="Gewicht eintragen">
                         </div>
                     </div>
                 </div>

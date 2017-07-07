@@ -23,19 +23,23 @@ require_once("includes/articleObject.php");
             <div class="d-flex flex-wrap justify-content-center">
             <div class="p-12">
                 Benutzername
+                <input type="text" class="form-control" id="nameInput" placeholder="Benutzername eintragen...">
             </div>
             </div>
             <div class="d-flex flex-wrap justify-content-center">
                 <div class="p-12">
                     E-Mail Adresse
+                    <input type="email" class="form-control" id="emailInput" placeholder="E-Mail Adresse eintragen...">
                 </div>
             </div>
-            <div class="d-flex flex-wrap justify-content-center">
+            <div class="d-flex flex-wrap justify-content-around">
                 <div class="p-6">
                     Passwort
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Passwort eintragen...">
                 </div>
                 <div class="p-6">
                     Passwort wiederholen
+                    <input type="password" class="form-control" id="passwordAgainInput" placeholder="Passwort erneut eintragen...">
                 </div>
             </div>
         </div>

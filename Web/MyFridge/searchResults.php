@@ -6,7 +6,7 @@ require_once("includes/articleObject.php");
 <head>
     <script>
         $(document).ready(function () {
-            var searchTerm = "<?php echo $_GET["searchInput"]; ?>";
+            var searchTerm = "<?php echo $_POST["searchInput"]; ?>";
             getSearchResult(searchTerm, 0, 30);
         });
     </script>
