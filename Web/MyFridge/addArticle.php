@@ -5,19 +5,20 @@ require_once("includes/loadAssets.html");
 <head>
     <script>
         $(document).ready(function () {
+            //TODO: Müsste noch eingestellt werden wie die Abfragen auf Eingabe überprüft werden sollen
             getArticleGroupList();
             getProducerNameList();
-            var formArray = $("#newArticleForm").serializeArray();
-
 
             $("#submitFormButton").click(function () {
+                var formArray = $("#newArticleForm").serializeArray();
                 var newArticle = {
                     name: formArray[0].value,
                     articleGroup: formArray[1].value,
                     producer : formArray[2].value,
                     barcode : formArray[3].value,
                     size : formArray[4].value,
-                    sizeType : formArray[5].value
+                    sizeType : formArray[5].value,
+                    price : formArray[6].value
                 };
                 insertNewArticle(newArticle);
             });
@@ -47,14 +48,14 @@ require_once("includes/loadAssets.html");
                         Artikelgruppe
                         <select class="form-control" name="articleGroupSelect" id="articleGroupSelect"
                                 title="articleGroupSelect">
-                            <option selected disabled>Bitte auswählen...</option>
+                            <option value="" selected disabled>Bitte auswählen...</option>
                         </select>
                     </div>
                     <div class="p-6">
                         Hersteller
                         <select class="form-control" name="producerNameSelect" id="producerNameSelect"
                                 title="producerNameSelect">
-                            <option selected disabled>Bitte auswählen...</option>
+                            <option value="" selected disabled>Bitte auswählen...</option>
                         </select>
                     </div>
                 </div>
@@ -79,6 +80,13 @@ require_once("includes/loadAssets.html");
                             <option value="ml">ml</option>
                             <option value="l">l</option>
                         </select>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <div class="p-12">
+                        Kaufpreis
+                        <input type="number" class="form-control" name="priceInput" id="priceInput"
+                               placeholder="Kaufpreis eintragen...">
                     </div>
                 </div>
                 <div class="d-flew flex-wrap justify-content-center">
