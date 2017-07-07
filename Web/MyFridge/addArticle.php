@@ -5,6 +5,14 @@ require_once("includes/loadAssets.html");
 <head>
     <script>
         $(document).ready(function () {
+            getArticleGroupList();
+            getProducerNameList();
+
+            var formArray = $("#newArticleForm").serializeArray();
+
+            $("#submitFormButton").click(function () {
+
+            });
 
         });
     </script>
@@ -18,7 +26,7 @@ require_once("includes/loadAssets.html");
             Neuer Artikel
         </h2>
         <div class="card-text">
-            <form>
+            <form role="form" id="newArticleForm" name="newArticleForm" method="post" enctype="multipart/form-data">
                 <div class="d-flex flex-wrap justify-content-center">
                     <div class="p-12">
                         Name
@@ -29,13 +37,13 @@ require_once("includes/loadAssets.html");
                     <div class="p-6">
                         Artikelgruppe
                         <select class="form-control" id="articleGroupSelect" title="articleGroupSelect">
-                            <option>EMPTY</option>
+                            <option selected disabled>Bitte auswählen...</option>
                         </select>
                     </div>
                     <div class="p-6">
                         Hersteller
                         <select class="form-control" id="producerNameSelect" title="producerNameSelect">
-                            <option>EMPTY</option>
+                            <option selected disabled>Bitte auswählen...</option>
                         </select>
                     </div>
                 </div>

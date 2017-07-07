@@ -1,5 +1,7 @@
 
 var articleArray = [];
+var articleGroupArray = [];
+var producerArray = [];
 
 function getSearchResult (searchTerm, startPos, rowCount) {
     $.post("../../includes/ajax/getAllArticles.php", {searchTerm : searchTerm, startPos : startPos, rowCount : rowCount}).done(function (data) {
@@ -20,18 +22,6 @@ function getSearchResult (searchTerm, startPos, rowCount) {
             $("#articleList").append(createListItem(articleArray[j]));
         }
     });
-}
-
-/*
- * Author: Kip @ StackOverflow
- */
-function escapeHtml(text) {
-
-    var s = text;
-
-    s.replace("&", "||");
-
-    return s;
 }
 
 function createListItem(articleItem) {
@@ -72,5 +62,53 @@ function createListItem(articleItem) {
     s += "</div>";
 
     JsBarcode(".barcode").init();
+    return s;
+}
+
+/*
+ * Author: Kip @ StackOverflow
+ */
+function escapeHtml(text) {
+
+    var s = text;
+
+    s.replace("&", "||");
+
+    return s;
+}
+
+function getArticleGroupList() {
+    $.get("../../includes/ajax/getAllArticleGroup.php").done(function (data) {
+        for(var i = 0; i < data.length; i++) {
+            var articleGroup = {
+                name : data[i].name
+            };
+            articleGroupArray.push(articleGroup);
+        }
+        for(var j = 0; j < articleGroupArray.length; j++) {
+            $("#articleGroupSelect").append(createSelectOption(articleGroupArray[j].name));
+        }
+    });
+}
+
+function getProducerNameList() {
+    $.get("../../includes/ajax/getAllProducer.php").done(function (data) {
+        for(var i = 0; i < data.length; i++) {
+            var producer = {
+                name : data[i].name
+            };
+            producerArray.push(producer);
+        }
+        for(var j = 0; j < producerArray.length; j++) {
+            $("#producerNameSelect").append(createSelectOption(producerArray[j].name));
+        }
+    });
+}
+
+function createSelectOption(d) {
+    var s = "";
+
+    s += "<option value='" + d + "'>" + d + "</option>";
+
     return s;
 }
