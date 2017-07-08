@@ -7,6 +7,6 @@ function sendLoginData(obj) {
 
 function sendRegisterData(obj) {
     $.post("/ajax.php?action=register", {user : obj.name, email : obj.email, pass : obj.pass}).done(function (data) {
-        console.log("Registrierungsdaten gesendet " + data);
+        console.log("Registrierungsdaten gesendet " + data.success);
     });
 }

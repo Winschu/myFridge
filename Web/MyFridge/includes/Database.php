@@ -23,7 +23,7 @@ class Database {
 
 	public function newUser(string $user, string $pass, string $email){
 		$hash = hash("sha256", $pass);
-		if(!(pg_prepare($this->con,"", "INSERT INTO user_data (user_name, email, password_hash) VALUES $1, $2, $3"))){
+		if(!(pg_prepare($this->con,"", "INSERT INTO user_data (user_name, email, password_hash) VALUES ($1, $2, $3)"))){
 			throw new ErrorException(pg_last_error());
 		}
 		if(!($dbres = pg_execute($this->con, "", array($user, $email, $hash)))) {
