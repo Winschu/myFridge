@@ -20,11 +20,11 @@ if (!$result) {
 }
 while ($data = pg_fetch_object($result)) {
     $returnValue[] = [
-        "articleName" => $data->name,
-        "articleGroup" => $data->group_name,
-        "articleHighestPrice" => $data->highest_price,
-        "articleSize" => $data->size,
-        "articleSizeType" => $data->size_type
+        "name" => $data->name,
+        "groupName" => $data->group_name,
+        "highestPrice" => $data->highest_price,
+        "size" => $data->size,
+        "sizeType" => $data->size_type
     ];
 }
 
