@@ -6,7 +6,14 @@ require_once("includes/loadAssets.html");
 <head>
     <script>
         $(document).ready(function () {
-
+            $("#loginButton").click(function () {
+                var formArray = $("#loginForm").serializeArray();
+                var user = {
+                    name: formArray[0].value,
+                    pass: formArray[1].value
+                };
+                sendLoginData(user);
+            });
         });
     </script>
     <title>Home</title>
@@ -19,16 +26,24 @@ require_once("includes/loadAssets.html");
             Anmelden
         </h2>
         <div class="card-text">
+            <form role="form" id="loginForm" name="loginForm" method="post" enctype="multipart/form-data">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <div class="p-12">
+                        Benutzername
+                        <input type="text" class="form-control" name="nameInput" id="nameInput" placeholder="Benutzername eintragen...">
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-around">
+                    <div class="p-12">
+                        Passwort
+                        <input type="password" class="form-control" name="passwordInput" id="passwordInput"
+                               placeholder="Passwort eintragen...">
+                    </div>
+                </div>
+            </form>
             <div class="d-flex flex-wrap justify-content-center">
                 <div class="p-12">
-                    Benutzername
-                    <input type="text" class="form-control" id="nameInput" placeholder="Benutzername eintragen...">
-                </div>
-            </div>
-            <div class="d-flex flex-wrap justify-content-around">
-                <div class="p-12">
-                    Passwort
-                    <input type="password" class="form-control" id="passwordInput" placeholder="Passwort eintragen...">
+                    <button type="button" class="btn btn-primary" id="loginButton" name="loginButton" style="cursor: pointer;">Anmelden</button>
                 </div>
             </div>
         </div>
