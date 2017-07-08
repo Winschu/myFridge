@@ -96,8 +96,6 @@ function createSelectOption(d) {
 function createListItem(articleItem) {
     var s = "";
 
-    JsBarcode(".barcode").init();
-
     s += "<div class='card'>";
     s += "<div class='card-block'>";
     s += "<div class='d-flex flex-wrap justify-content-between'>";

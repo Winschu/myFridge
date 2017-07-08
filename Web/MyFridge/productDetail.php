@@ -5,16 +5,13 @@ require_once("includes/articleObject.php");
 ?>
 <html>
 <head>
-    <script>
-        //TODO: Andere Parameter noch einfügen
-    </script>
+
     <title>Artikel</title>
     <?php require_once("includes/loadNavbar.html"); ?>
     <?php
     $article = null;
     $articleName = $_GET["articleName"];
     $articleName = str_replace("%20", " ", $articleName);
-    echo $articleName;
     $dbCon = new dbCredentials();
     $pgCon = pg_connect($dbCon->getDBString());
     $result = pg_query($pgCon, "
@@ -34,7 +31,7 @@ WHERE name = '$articleName'
 <body>
 <div class="container-fluid">
     <div class="card">
-        <h2 class="card-header" id="articleNameText">
+        <h2 class="card-header text-center" id="articleNameText">
             <?php echo $article->getArticleName(); ?>
         </h2>
         <div class="card-text">
@@ -43,8 +40,33 @@ WHERE name = '$articleName'
                     Artikelgruppe: <?php echo $article->getArticleGroupName(); ?>
                 </div>
             </div>
+            <div class="d-flex flex-wrap justify-content-around">
+                <div class="p-12">
+                    Hersteller: <?php echo $article->getArticleProducerName(); ?>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="p-12">
+                    Inhalt: <?php echo $article->getArticleSize() . $article->getArticleSizeType(); ?>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="p-12">
+                    <svg class="barcode" jsbarcode-format="EAN13"
+                         jsbarcode-value="<?php echo $article->getArticleBarcode(); ?>" jsbarcode-textmargin='0'
+                         jsbarcode-fontoptions='bold'></svg>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="p-12">
+                    Höchster Preis: <?php echo $article->getArticleHighestPrice() . " (vom " . $article->getArticleLastUpdate() . ")"; ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </body>
+<script>
+    JsBarcode(".barcode").init();
+</script>
 </html>
