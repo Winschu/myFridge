@@ -3,9 +3,6 @@
 <head>
     <script>
         $(document).ready(function () {
-            console.log(<?php $dbString ?>);
-            loadAllArticles();
-            fillAllArticlesList(getAllArticles());
         });
     </script>
     <title>Home</title>
