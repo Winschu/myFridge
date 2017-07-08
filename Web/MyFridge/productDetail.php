@@ -6,7 +6,7 @@ require_once("includes/articleObject.php");
 <html>
 <head>
     <script>
-
+        //TODO: Andere Parameter noch einfügen
     </script>
     <title>Artikel</title>
     <?php require_once("includes/loadNavbar.html"); ?>
@@ -39,7 +39,7 @@ WHERE name = '$articleName'
         </h2>
         <div class="card-text">
             <div class="d-flex flex-wrap justify-content-around">
-                <div class="p-6">
+                <div class="p-12">
                     Artikelgruppe: <?php echo $article->getArticleGroupName(); ?>
                 </div>
             </div>
