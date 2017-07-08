@@ -29,7 +29,7 @@ class Database {
 		if(!($dbres = pg_execute($this->con, "", array($user, $email, $hash)))) {
 			throw new Exception(pg_last_error());
 		}
-		return pg_affected_rows($this->con);
+		return pg_affected_rows($dbres);
 	}
 
 	public function changePassword(string $user, string $newPass){
@@ -40,7 +40,7 @@ class Database {
 		if(!($dbres = pg_execute($this->con, "", array($hash, $user)))) {
 			throw new Exception(pg_last_error());
 		}
-		return pg_affected_rows($this->con);
+		return pg_affected_rows($dbres);
 	}
 
 
