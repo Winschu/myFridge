@@ -87,7 +87,7 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->getAllArticlesByUser(
-                @$_POST["term"] ?: "%"
+                @$_POST["name"] ?: "%"
             );
             $return["success"] = true;
         } catch (Exception $e) {
@@ -141,16 +141,61 @@ switch ($action) {
         }
         break;
     case "changeArticleInventory":
-        //TODO: changeArticleInventory verbinden
+        $return["action"] = $action;
+        try {
+            $return["data"] = $db->changeArticleInventory(
+                @$_POST["user"] ?: "",
+                @$_POST["count"] ?: "",
+                    @$_POST["barcode"] ?: ""
+            );
+            $return["success"] = true;
+        } catch (Exception $e) {
+            $return["errorMsg"] = $e->getMessage();
+        }
         break;
     case "insertNewArticle":
-        //TODO: insertNewArticle verbinden
+        $return["action"] = $action;
+        try {
+            $return["data"] = $db->insertNewArticle(
+                @$_POST["name"] ?: "",
+                @$_POST["articleGroup"] ?: "",
+                @$_POST["producer"] ?: "",
+                @$_POST["barcode"] ?: "",
+                @$_POST["size"] ?: 0,
+                @$_POST["sizeType"] ?: "",
+                @$_POST["price"] ?: 0
+            );
+            $return["success"] = true;
+        } catch (Exception $e) {
+            $return["errorMsg"] = $e->getMessage();
+        }
         break;
     case "InsertArticleInventory":
-        //TODO: insertArticleToInventory verbinden
+        $return["action"] = $action;
+        try {
+            $return["data"] = $db->insertArticleInventory(
+                @$_POST["name"] ?: "",
+                @$_POST["date"] ?: "",
+                @$_POST["price"] ?: 0,
+                @$_POST["count"] ?: 0,
+                @$_POST["barcode"] ?: 0
+            );
+            $return["success"] = true;
+        } catch (Exception $e) {
+            $return["errorMsg"] = $e->getMessage();
+        }
         break;
     case "deleteArticleInventory":
-        //TODO: deleteArticleInventory verbinden
+        $return["action"] = $action;
+        try {
+            $return["data"] = $db->deleteArticleInventory(
+                @$_POST["user"] ?: "",
+                @$_POST["barcode"] ?: 0
+            );
+            $return["success"] = true;
+        } catch (Exception $e) {
+            $return["errorMsg"] = $e->getMessage();
+        }
         break;
 }
 
