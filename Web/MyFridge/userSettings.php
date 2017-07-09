@@ -37,7 +37,7 @@ require_once("includes/loadAssets.html");
                     <span id="userNameText"><?php echo $_SESSION["user"]; ?></span>
                 </div>
             </div>
-            <form>
+            <form role="form" id="changeUserDataForm" name="changeUserDataForm" method="post" enctype="multipart/form-data">
                 <div class="d-flex flex-wrap justify-content-center form-group">
                     <div class="p-12">
                         <span>Persönliche Maße ändern</span>
@@ -61,7 +61,7 @@ require_once("includes/loadAssets.html");
                     Daten ändern
                 </button>
             </div>
-            <form>
+            <form role="form" id="changeEmailForm" name="changeEmailForm" method="post" enctype="multipart/form-data">
                 <div class="d-flex flex-wrap justify-content-center form-group">
                     <div class="p-12">
                         <span>E-Mail Adresse ändern</span>
