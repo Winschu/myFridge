@@ -11,23 +11,26 @@ function getSearchResult(searchTerm, startPos, rowCount) {
         startPos: startPos,
         rowCount: rowCount
     }).done(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var article = {
-                name: data[i].name,
-                groupName: data[i].groupName,
-                barcode: data[i].barcode,
-                highestPrice: data[i].highestPrice,
-                producerName: data[i].producerName,
-                size: data[i].size,
-                sizeType: data[i].sizeType,
-                lastUpdate: data[i].lastUpdate
-            };
-            articleArray.push(article);
-        }
-        for (var j = 0; j < articleArray.length; j++) {
-            $("#articleList").append(createListItem(articleArray[j]));
-        }
-        JsBarcode(".barcode").init();
+        if(data.success){
+            data = data.data;
+            for (var i = 0; i < data.length; i++) {
+                var article = {
+                    name: data[i].name,
+                    groupName: data[i].groupName,
+                    barcode: data[i].barcode,
+                    highestPrice: data[i].highestPrice,
+                    producerName: data[i].producerName,
+                    size: data[i].size,
+                    sizeType: data[i].sizeType,
+                    lastUpdate: data[i].lastUpdate
+                };
+                articleArray.push(article);
+            }
+            for (var j = 0; j < articleArray.length; j++) {
+                $("#articleList").append(createListItem(articleArray[j]));
+            }
+            JsBarcode(".barcode").init();
+    }
     });
 }
 
@@ -36,14 +39,17 @@ function getSearchResult(searchTerm, startPos, rowCount) {
  */
 function getArticleGroupList() {
     $.get("/ajax.php?action=getAllArticleGroup").done(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var articleGroup = {
-                name: data[i].name
-            };
-            articleGroupArray.push(articleGroup);
-        }
-        for (var j = 0; j < articleGroupArray.length; j++) {
-            $("#articleGroupSelect").append(createSelectOption(articleGroupArray[j].name));
+        if(data.success) {
+            data = data.data;
+            for (var i = 0; i < data.length; i++) {
+                var articleGroup = {
+                    name: data[i].name
+                };
+                articleGroupArray.push(articleGroup);
+            }
+            for (var j = 0; j < articleGroupArray.length; j++) {
+                $("#articleGroupSelect").append(createSelectOption(articleGroupArray[j].name));
+            }
         }
     });
 }
@@ -53,14 +59,17 @@ function getArticleGroupList() {
  */
 function getProducerNameList() {
     $.get("/ajax.php?action=getAllProducer").done(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var producer = {
-                name: data[i].name
-            };
-            producerArray.push(producer);
-        }
-        for (var j = 0; j < producerArray.length; j++) {
-            $("#producerNameSelect").append(createSelectOption(producerArray[j].name));
+        if(data.success) {
+            data = data.data;
+            for (var i = 0; i < data.length; i++) {
+                var producer = {
+                    name: data[i].name
+                };
+                producerArray.push(producer);
+            }
+            for (var j = 0; j < producerArray.length; j++) {
+                $("#producerNameSelect").append(createSelectOption(producerArray[j].name));
+            }
         }
     });
 }
@@ -70,42 +79,48 @@ function getProducerNameList() {
  */
 function getAllArticlesByProducer(producerName) {
     $.post("/ajax.php?action=getAllArticlesByProducer", {producerName: producerName}).done(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var article = {
-                name: data[i].name,
-                groupName: data[i].groupName,
-                barcode: data[i].barcode,
-                highestPrice: data[i].highestPrice,
-                size: data[i].size,
-                sizeType: data[i].sizeType,
-                lastUpdate: data[i].lastUpdate
-            };
-            articleArray.push(article);
-        }
-        for (var j = 0; j < articleArray.length; j++) {
-            $("#articleList").append(createProducerListItem(articleArray[j]));
+        if(data.success) {
+            data = data.data;
+            for (var i = 0; i < data.length; i++) {
+                var article = {
+                    name: data[i].name,
+                    groupName: data[i].groupName,
+                    barcode: data[i].barcode,
+                    highestPrice: data[i].highestPrice,
+                    size: data[i].size,
+                    sizeType: data[i].sizeType,
+                    lastUpdate: data[i].lastUpdate
+                };
+                articleArray.push(article);
+            }
+            for (var j = 0; j < articleArray.length; j++) {
+                $("#articleList").append(createProducerListItem(articleArray[j]));
+            }
         }
     });
 }
 
 function getAllArticlesByUser(userName) {
     $.post("/ajax.php?action=getAllArticlesByUser", {name: userName}).done(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var article = {
-                name: data[i].name,
-                producerName: data[i].producerName,
-                groupName: data[i].groupName,
-                barcode: data[i].barcode,
-                size: data[i].size,
-                sizeType: data[i].sizeType,
-                data: data[i].date,
-                count: data[i].count,
-                price: data[i].price
-            };
-            articleArray.push(article);
-        }
-        for (var j = 0; j < articleArray.length; j++) {
-            $("#articleList").append(createUserListItem(articleArray[j]));
+        if(data.success) {
+            data = data.data;
+            for (var i = 0; i < data.length; i++) {
+                var article = {
+                    name: data[i].name,
+                    producerName: data[i].producerName,
+                    groupName: data[i].groupName,
+                    barcode: data[i].barcode,
+                    size: data[i].size,
+                    sizeType: data[i].sizeType,
+                    data: data[i].date,
+                    count: data[i].count,
+                    price: data[i].price
+                };
+                articleArray.push(article);
+            }
+            for (var j = 0; j < articleArray.length; j++) {
+                $("#articleList").append(createUserListItem(articleArray[j]));
+            }
         }
     });
 }
@@ -195,20 +210,22 @@ function createProducerListItem(articleItem) {
     //end of Main box
 
     //Barcode
-    var barcodeType = null;
-    if (articleItem.barcode.length === 13)
-        barcodeType = "EAN13";
-    else if (articleItem.barcode.length === 8)
-        barcodeType = "EAN8";
+    if(articleItem.barcode) {
+        var barcodeType = null;
+        if (articleItem.barcode.length === 13)
+            barcodeType = "EAN13";
+        else if (articleItem.barcode.length === 8)
+            barcodeType = "EAN8";
 
-    if (barcodeType) {
-        s += "<div class='p-6'>";
-        s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
-        s += '</div>';
+        if (barcodeType) {
+            s += "<div class='p-6'>";
+            s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
+            s += '</div>';
 
-        s += "</div>";
-        s += "</div>";
-        s += "</div>";
+            s += "</div>";
+            s += "</div>";
+            s += "</div>";
+        }
     }
     return s;
 }
@@ -244,20 +261,22 @@ function createUserListItem(articleItem) {
     //end of Main box
 
     //Barcode
-    var barcodeType = null;
-    if (articleItem.barcode.length === 13)
-        barcodeType = "EAN13";
-    else if (articleItem.barcode.length === 8)
-        barcodeType = "EAN8";
+    if(articleItem.barcode) {
+        var barcodeType = null;
+        if (articleItem.barcode.length === 13)
+            barcodeType = "EAN13";
+        else if (articleItem.barcode.length === 8)
+            barcodeType = "EAN8";
 
-    if (barcodeType) {
-        s += "<div class='p-6'>";
-        s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
-        s += '</div>';
+        if (barcodeType) {
+            s += "<div class='p-6'>";
+            s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
+            s += '</div>';
 
-        s += "</div>";
-        s += "</div>";
-        s += "</div>";
+            s += "</div>";
+            s += "</div>";
+            s += "</div>";
+        }
     }
     return s;
 }

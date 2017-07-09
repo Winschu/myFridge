@@ -63,9 +63,9 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->getAllArticles(
-                @$_POST["term"] ?: "%",
-                @$_POST["start"] ?: 0,
-                @$_POST["limit"] ?: 30
+                @$_POST["searchTerm"] ?: "%",
+                @$_POST["startPos"] ?: 0,
+                @$_POST["rowCount"] ?: 30
             );
             $return["success"] = true;
         } catch (Exception $e) {
@@ -76,7 +76,7 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->getAllArticlesByProducer(
-                @$_POST["term"] ?: "%"
+                @$_POST["producerName"] ?: "%"
             );
             $return["success"] = true;
         } catch (Exception $e) {
@@ -87,7 +87,7 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->getAllArticlesByUser(
-                @$_POST["term"] ?: "%"
+                @$_POST["name"] ?: "%"
             );
             $return["success"] = true;
         } catch (Exception $e) {
