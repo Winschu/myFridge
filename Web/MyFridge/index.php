@@ -4,11 +4,6 @@ require_once("includes/loadAssets.html");
 ?>
 <html>
 <head>
-    <script>
-        $(document).ready(function () {
-            getSessionState();
-        });
-    </script>
     <title>Home</title>
     <?php require_once("includes/loadNavbar.php"); ?>
 </head>

@@ -5,7 +5,6 @@ require_once("includes/loadAssets.html");
 <head>
     <script>
         $(document).ready(function () {
-            getSessionState();
             var searchTerm = "<?php echo $_POST["searchInput"]; ?>";
             getSearchResult(searchTerm, 0, 30);
         });

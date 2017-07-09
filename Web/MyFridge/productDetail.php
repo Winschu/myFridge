@@ -32,7 +32,6 @@ WHERE name = '$articleName'
     ?>
     <script>
         $(document).ready(function () {
-            getSessionState();
             var user = "<?php echo $_SESSION["user"]; ?>";
 
             /*
