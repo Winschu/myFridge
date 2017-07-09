@@ -176,7 +176,7 @@ SQL;
         return $return;
     }
 
-    public function getAllArticlesByUser(string $term)
+    public function getAllArticlesByUser(string $name)
     {
         $sql = <<<SQL
 SELECT best_before_date, current_price, article_list.barcode AS barcode, user_name
@@ -188,7 +188,7 @@ SQL;
         if (!(pg_prepare($this->con, "", $sql))) {
             throw new Exception(pg_last_error());
         }
-        if (!($dbres = pg_execute($this->con, "", array($term)))) {
+        if (!($dbres = pg_execute($this->con, "", array($name)))) {
             throw new Exception(pg_last_error());
         }
         $return = array();
@@ -295,4 +295,80 @@ SQL;
         return pg_affected_rows($dbres);
     }
 
+    public function changeArticleInventory(string $user, int $count, int $barcode)
+    {
+        $sql = <<<SQL
+UPDATE article_list
+SET count = $2
+WHERE user_name = $1 AND barcode = $3
+SQL;
+
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute($this->con, "", array($user, $count, $barcode)))) {
+            throw new Exception(pg_last_error());
+        }
+
+        return pg_affected_rows($dbres);
+    }
+
+    public function insertNewArticle(string $name, string $articleGroup, string $producer, int $barcode, int $size, string $sizeType, float $price)
+    {
+        $sql = <<<SQL
+INSERT INTO article (name, group_name, producer_name, barcode, size, size_type, highest_price)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
+SQL;
+
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute(
+            $this->con, "", array($name, $articleGroup, $producer, $barcode, $size, $sizeType, $price)
+        ))
+        ) {
+            throw new Exception(pg_last_error());
+        }
+
+        return pg_affected_rows($dbres);
+    }
+
+    public function insertArticleInventory(string $user, string $date, float $price, int $count, int $barcode)
+    {
+        $sql = <<<SQL
+INSERT INTO article_list (user_name, best_before_date, current_price, count, barcode)
+VALUES ($1, $2, $3, $4, $5)
+SQL;
+
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute(
+            $this->con, "", array($user, $date, $price, $count, $barcode)
+        ))
+        ) {
+            throw new Exception(pg_last_error());
+        }
+
+        return pg_affected_rows($dbres);
+    }
+
+    public function deleteArticleInventory(string $user, int $barcode)
+    {
+        $sql = <<<SQL
+DELETE FROM article_list WHERE user_name = $1 AND barcode = $2 
+SQL;
+
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute(
+            $this->con, "", array($user, $barcode)
+        ))
+        ) {
+            throw new Exception(pg_last_error());
+        }
+
+        return pg_affected_rows($dbres);
+    }
 }
