@@ -32,6 +32,7 @@ function getSessionState() {
             return true;
         }
         else {
+            $("#userSettingsPage").hide();
             return false;
         }
     });
