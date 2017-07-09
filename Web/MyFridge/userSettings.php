@@ -61,7 +61,7 @@ require_once("includes/loadAssets.html");
                         </div>
                         <div class="p-6">
                             <span id="userWeightText">WEIGHT</span>
-                            <input type="number" class="form-control" name="weigthInput" id="weigthInput"
+                            <input type="number" class="form-control" name="weightInput" id="weightInput"
                                    placeholder="Gewicht eintragen" value="">
                         </div>
                         <div class="p-6">

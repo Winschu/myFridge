@@ -87,19 +87,22 @@ function deleteArticleInventory(obj) {
 /*
  * Gibt Benutzer mit gegebenem Benutzernamen zurück
  */
-function getSpecificUser(userName) {
-    $.post("/ajax.php?action=getSpecificUser", {userName: userName}).done(function (data) {
-        var userData = {
-            user: data.user,
-            email: data.email,
-            size: data.size,
-            weight: data.weight,
-            age: data.age
-        };
-        $("#sizeInput").val(userData.size);
-        $("#weightInput").val(userData.weight);
-        $("#ageInput").val(userData.age);
-        $("#emailAdressInput").val(userData.email);
+function getSpecificUser() {
+    $.post("/ajax.php?action=getSpecificUser").done(function (data) {
+        if(data.success) {
+            data = data.data[0];
+            var userData = {
+                user: data.user,
+                email: data.email,
+                size: parseFloat(data.size),
+                weight: parseFloat(data.weight),
+                age: data.age
+            };
+            $("#sizeInput").val(userData.size);
+            $("#weightInput").val(userData.weight);
+            $("#ageInput").val(userData.age);
+            $("#emailAdressInput").val(userData.email);
+        }
     });
 }
 

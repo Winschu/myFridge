@@ -112,7 +112,7 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->getSpecificUser(
-                @$_POST["term"] ?: "%"
+                @$_SESSION["user"] ?: ""
             );
             $return["success"] = true;
         } catch (Exception $e) {
