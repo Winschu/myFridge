@@ -1,8 +1,10 @@
 <?php
 require_once("config.php");
+if (!isset($_SESSION["user"])) {
+    header('Location: http://localhost/index.php');
+}
 require_once("includes/loadAssets.html");
 require_once("includes/articleObject.php");
-//TODO: Abfrage ob Nutzer schon angxemeldet ist
 ?>
 <html>
 <head>

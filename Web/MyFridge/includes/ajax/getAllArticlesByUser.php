@@ -5,12 +5,20 @@ require_once("../dbCredentials.php");
 
 $dbCon = new dbCredentials();
 
-$userName = $_POST["name"];
+global $userName;
+
+if(isset($_POST["name"])) {
+    $userName = $_POST["name"];
+}
+else{
+    print "Benutzername ist nicht gegeben!";
+}
+
 
 $pgCon = pg_connect($dbCon->getDBString());
 $returnValue = [];
 $result = pg_query($pgCon, "
-SELECT best_before_date, current_price, article_list.barcode AS barcode, user_name
+SELECT *
 FROM article_list
 JOIN article ON article.barcode = article_list.barcode
 WHERE user_name = '$userName'
@@ -23,9 +31,13 @@ while ($data = pg_fetch_object($result)) {
     $returnValue[] = [
         "name" => $data->name,
         "groupName" => $data->group_name,
-        "highestPrice" => $data->highest_price,
+        "producerName" => $data->producer_name,
+        "barcode" => $data->barcode,
         "size" => $data->size,
-        "sizeType" => $data->size_type
+        "sizeType" => $data->size_type,
+        "date" => $data->best_before_date,
+        "count" => $data->count,
+        "price" => $data->current_price
     ];
 }
 

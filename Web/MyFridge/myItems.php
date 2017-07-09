@@ -1,11 +1,16 @@
 <?php
+require_once("config.php");
+if (!isset($_SESSION["user"])) {
+    header('Location: http://localhost/index.php');
+}
 require_once("includes/loadAssets.html");
 ?>
 <html>
 <head>
     <script>
         $(document).ready(function () {
-            getAllArticlesByUser();
+            var user = "<?php echo $_SESSION["user"]; ?>";
+            getAllArticlesByUser(user);
         });
     </script>
     <title>Inventar von <?php echo $_SESSION["user"]; ?></title>

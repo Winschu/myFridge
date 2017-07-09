@@ -7,7 +7,7 @@ require_once("includes/loadAssets.html");
     <script>
         $(document).ready(function () {
             var producerName = "<?php echo $_GET["producerName"]; ?>";
-            getAllArticlesByProducer(producerName, 0, 30);
+            getAllArticlesByProducer(producerName);
         });
     </script>
     <title>Artikel von bestimmten Hersteller</title>

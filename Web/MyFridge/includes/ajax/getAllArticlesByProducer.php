@@ -22,6 +22,7 @@ while ($data = pg_fetch_object($result)) {
     $returnValue[] = [
         "name" => $data->name,
         "groupName" => $data->group_name,
+        "barcode" => $data->barcode,
         "highestPrice" => $data->highest_price,
         "size" => $data->size,
         "sizeType" => $data->size_type

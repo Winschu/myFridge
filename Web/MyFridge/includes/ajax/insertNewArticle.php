@@ -37,5 +37,9 @@ VALUES
 );
 if (!$result) {
     echo "Ein Fehler ist aufgetreten.\n";
+    print false;
     exit;
+}
+else{
+    print true;
 }
