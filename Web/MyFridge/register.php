@@ -28,7 +28,7 @@ require_once("includes/articleObject.php");
         });
     </script>
     <title>Registrierung</title>
-    <?php require_once("includes/loadNavbar.html"); ?>
+    <?php require_once("includes/loadNavbar.php"); ?>
 </head>
 <body>
 <div class="container-fluid">

@@ -14,7 +14,7 @@ require_once("includes/loadAssets.html");
         });
     </script>
     <title>Inventar von <?php echo $_SESSION["user"]; ?></title>
-    <?php require_once("includes/loadNavbar.html"); ?>
+    <?php require_once("includes/loadNavbar.php"); ?>
 </head>
 <body>
 <div class="container-fluid">

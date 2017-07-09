@@ -29,6 +29,11 @@ switch ($action) {
             $return["errorMsg"] = $e->getMessage();
         }
         break;
+    case "logout":
+        $return["action"] = $action;
+        session_destroy();
+		$return["success"] = true;
+        break;
     case "register":
         $return["action"] = $action;
         try {

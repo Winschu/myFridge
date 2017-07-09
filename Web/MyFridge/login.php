@@ -20,7 +20,7 @@ require_once("includes/loadAssets.html");
         });
     </script>
     <title>Home</title>
-    <?php require_once("includes/loadNavbar.html"); ?>
+    <?php require_once("includes/loadNavbar.php"); ?>
 </head>
 <body>
 <div class="container-fluid">

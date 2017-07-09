@@ -29,7 +29,7 @@ require_once("includes/loadAssets.html");
         });
     </script>
     <title>Neuen Artikel anlegen</title>
-    <?php require_once("includes/loadNavbar.html"); ?>
+    <?php require_once("includes/loadNavbar.php"); ?>
 </head>
 <body>
 <div class="container-fluid">

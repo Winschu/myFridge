@@ -10,7 +10,7 @@ require_once("includes/articleObject.php");
 <html>
 <head>
     <title>Artikel</title>
-    <?php require_once("includes/loadNavbar.html"); ?>
+    <?php require_once("includes/loadNavbar.php"); ?>
     <?php
     $article = null;
     $articleName = $_GET["articleName"];
