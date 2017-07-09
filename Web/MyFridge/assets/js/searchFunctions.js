@@ -94,7 +94,7 @@ function getAllArticlesByProducer(producerName) {
                 articleArray.push(article);
             }
             for (var j = 0; j < articleArray.length; j++) {
-                $("#articleList").append(createProducerListItem(articleArray[j]));
+                $("#articleList").append(createUserListItem(articleArray[j], false));
             }
         }
     });
@@ -119,7 +119,7 @@ function getAllArticlesByUser(userName) {
                 articleArray.push(article);
             }
             for (var j = 0; j < articleArray.length; j++) {
-                $("#articleList").append(createUserListItem(articleArray[j]));
+                $("#articleList").append(createUserListItem(articleArray[j], true));
             }
         }
     });
@@ -185,53 +185,6 @@ function createListItem(articleItem) {
 
 /*
  * Listeneintrag für die Ausgabe der Suche nach Herstellerprodukten erstellen
- */
-function createProducerListItem(articleItem) {
-    var s = "";
-
-    s += "<div class='card'>";
-    s += "<div class='card-block'>";
-    s += "<div class='d-flex flex-wrap justify-content-between'>";
-
-    //Main box
-    s += "<div class='p-6'>";
-    s += "<a href='productDetail.php?articleName=" + articleItem.name + "'>" + articleItem.name + "</a>";
-
-    s += "<div class='d-flex flex-wrap justify-content-between'>";
-    s += "<div class='p-6'>";
-    s += articleItem.highestPrice;
-    s += "</div>";
-    s += "<div class='p-6'>";
-    s += articleItem.size + articleItem.sizeType;
-    s += "</div>";
-    s += "</div>";
-
-    s += "</div>";
-    //end of Main box
-
-    //Barcode
-    if(articleItem.barcode) {
-        var barcodeType = null;
-        if (articleItem.barcode.length === 13)
-            barcodeType = "EAN13";
-        else if (articleItem.barcode.length === 8)
-            barcodeType = "EAN8";
-
-        if (barcodeType) {
-            s += "<div class='p-6'>";
-            s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
-            s += '</div>';
-
-            s += "</div>";
-            s += "</div>";
-            s += "</div>";
-        }
-    }
-    return s;
-}
-
-/*
- *
  */
 function createUserListItem(articleItem, displayProducer) {
     var s = "";
