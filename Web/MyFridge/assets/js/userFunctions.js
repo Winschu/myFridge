@@ -40,6 +40,14 @@ function getSessionState() {
     });
 }
 
-function addArticleToInventory() {
-
+function addArticleToInventory(obj) {
+    $.post("../../includes/ajax/insertArticleToInventory.php", {user : obj.user, date : obj.date, price: obj.price, count : obj.count, barcode : obj.barcode}).done(function (data) {
+        if(data) {
+            alert("Artikel wurde eingetragen");
+        }
+        else
+        {
+            alert("Artikel konnte nicht eingetragen werden");
+        }
+    });
 }

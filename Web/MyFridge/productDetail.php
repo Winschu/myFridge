@@ -29,15 +29,20 @@ WHERE name = '$articleName'
     ?>
     <script>
         $(document).ready(function () {
-            if(<?php echo isset($_SESSION["user"]); ?>) {
-                var user = "<?php echo $_SESSION["user"]; ?>";
-            }
-            else
-            {
-                $("#addInventoryButton").hide();
-            }
+            getSessionState();
+            var user = "<?php echo $_SESSION["user"]; ?>";
             $("#addInventoryButton").click(function () {
-                addArticleToInventory()
+                var formArray = $("#articleToInventoryForm").serializeArray();
+                var inventoryEntry =
+                    {
+                        date: formArray[0].value,
+                        price: formArray[1].value,
+                        count: formArray[2].value,
+                        user: user,
+                        barcode: "<?php echo $article->getArticleBarcode(); ?>"
+                    };
+
+                addArticleToInventory(inventoryEntry);
             });
         });
     </script>
@@ -73,12 +78,42 @@ WHERE name = '$articleName'
             </div>
             <div class="d-flex flex-wrap justify-content-center">
                 <div class="p-12">
-                    Höchster Preis: <?php echo $article->getArticleHighestPrice() . " (vom " . $article->getArticleLastUpdate() . ")"; ?>
+                    Höchster
+                    Preis: <?php echo $article->getArticleHighestPrice() . " (vom " . $article->getArticleLastUpdate() . ")"; ?>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2 class="card-header text-center" id="addArticvleToInventoryHeader">
+            Artikel dem eigenen Inventar hinzufügen
+        </h2>
+        <div class="card-text">
+            <form role="form" id="articleToInventoryForm" name="articleToInventoryForm" method="post"
+                  enctype="multipart/form-data">
+                <div class="d-flex flex-wrap justify-content-around">
+                    <div class="p-4">
+                        MHD oder MVD
+                        <input type="date" class="form-control" name="dateInput" id="dateInput"
+                               placeholder="Artikelname eintragen...">
+                    </div>
+                    <div class="p-4">
+                        Kaufpreis
+                        <input type="number" class="form-control" name="priceInput" id="priceInput"
+                               placeholder="Artikelname eintragen...">
+                    </div>
+                    <div class="p-4">
+                        Anzahl
+                        <input type="number" class="form-control" name="countInput" id="countInput"
+                               placeholder="Artikelname eintragen...">
+                    </div>
+                </div>
+            </form>
             <div class="d-flex flex-wrap justify-content-center">
                 <div class="p-12">
-                    <button type="button" class="btn btn-primary" name="addInventoryButton" id="addInventoryButton" style="padding: 5px; cursor: pointer;">In das Lager packen</button>
+                    <button type="button" class="btn btn-primary" name="addInventoryButton" id="addInventoryButton"
+                            style="padding: 5px; cursor: pointer;">In das Lager packen
+                    </button>
                 </div>
             </div>
         </div>
