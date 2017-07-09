@@ -1,4 +1,5 @@
 <?php
+require_once("config.php");
 require_once("includes/loadAssets.html");
 require_once("includes/articleObject.php");
 //TODO: Abfrage ob Nutzer schon angxemeldet ist

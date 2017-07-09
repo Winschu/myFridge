@@ -1,8 +1,12 @@
-<?php require_once("includes/loadAssets.html"); ?>
+<?php
+require_once("config.php");
+require_once("includes/loadAssets.html");
+?>
 <html>
 <head>
     <script>
         $(document).ready(function () {
+            getSessionState();
         });
     </script>
     <title>Home</title>

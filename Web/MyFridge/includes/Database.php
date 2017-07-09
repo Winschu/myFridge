@@ -42,6 +42,4 @@ class Database {
 		}
 		return pg_affected_rows($dbres);
 	}
-
-
 }

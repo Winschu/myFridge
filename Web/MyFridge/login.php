@@ -1,6 +1,9 @@
 <?php
+require_once("config.php");
+if(isset($_SESSION["user"])) {
+    header('Location: http://localhost/index.php');
+}
 require_once("includes/loadAssets.html");
-//TODO: Abfrage ob Nutzer schon registriert oder bereits angemeldet ist
 ?>
 <html>
 <head>

@@ -5,3 +5,4 @@ define('DBPORT', 5432);
 define('DBDATABASE', 'myfridge');
 define('DBPASS', 'TI/%ERebo8ifg8ib6');
 
+session_start();

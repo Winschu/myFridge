@@ -1,11 +1,11 @@
 <?php
+require_once("config.php");
 require_once("includes/loadAssets.html");
 require_once("includes/dbCredentials.php");
 require_once("includes/articleObject.php");
 ?>
 <html>
 <head>
-
     <title>Artikel</title>
     <?php require_once("includes/loadNavbar.html"); ?>
     <?php
@@ -27,6 +27,20 @@ WHERE name = '$articleName'
         $article = new articleObject($data);
     }
     ?>
+    <script>
+        $(document).ready(function () {
+            if(<?php echo isset($_SESSION["user"]); ?>) {
+                var user = "<?php echo $_SESSION["user"]; ?>";
+            }
+            else
+            {
+                $("#addInventoryButton").hide();
+            }
+            $("#addInventoryButton").click(function () {
+                addArticleToInventory()
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -60,6 +74,11 @@ WHERE name = '$articleName'
             <div class="d-flex flex-wrap justify-content-center">
                 <div class="p-12">
                     Höchster Preis: <?php echo $article->getArticleHighestPrice() . " (vom " . $article->getArticleLastUpdate() . ")"; ?>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="p-12">
+                    <button type="button" class="btn btn-primary" name="addInventoryButton" id="addInventoryButton" style="padding: 5px; cursor: pointer;">In das Lager packen</button>
                 </div>
             </div>
         </div>

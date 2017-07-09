@@ -96,6 +96,25 @@ function getAllArticlesByProducer(producerName) {
     });
 }
 
+function getAllArticlesByUser(userName) {
+    $.post("../../includes/ajax/getAllArticlesByProducer.php", {name: userName}).done(function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var article = {
+                name: data[i].name,
+                groupName: data[i].groupName,
+                barcode: data[i].barcode,
+                highestPrice: data[i].highestPrice,
+                size: data[i].size,
+                sizeType: data[i].sizeType
+            };
+            articleArray.push(article);
+        }
+        for (var j = 0; j < articleArray.length; j++) {
+            $("#articleList").append(createProducerListItem(articleArray[j]));
+        }
+    });
+}
+
 /*
  * Abgekürzte Funktion zur Erstellung einer Auswahloption mit gleichem Wert und Anzeigetext
  */
@@ -160,7 +179,7 @@ function createProducerListItem(articleItem) {
 
     //Main box
     s += "<div class='p-6'>";
-    s += "<a href='productDetail.php?articleName=" + escapeHtml(articleItem.name) + "'>" + articleItem.name + "</a>";
+    s += "<a href='productDetail.php?articleName=" + articleItem.name + "'>" + articleItem.name + "</a>";
 
     s += "<div class='d-flex flex-wrap justify-content-between'>";
     s += "<div class='p-6'>";
@@ -184,19 +203,6 @@ function createProducerListItem(articleItem) {
     s += "</div>";
 
     JsBarcode(".barcode").init();
-    return s;
-}
-
-
-/*
- * Author: Kip @ StackOverflow
- */
-function escapeHtml(text) {
-
-    var s = text;
-
-    s.replace("&", "||");
-
     return s;
 }
 

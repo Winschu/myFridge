@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-header("Content-type:text/plain; charset=UTF-8");
+header("Content-type: application/json; charset=UTF-8");
 
 require_once("config.php");
 require_once("includes\Database.php");
@@ -36,7 +34,12 @@ switch ($action) {
         );
         if ($result) {
             $return["success"] = $result;
-            #$_SESSION["user"] = $_POST["user"];
+        }
+        break;
+    case "sessionState":
+        $return["action"] = $action;
+        if(isset($_SESSION["user"])) {
+            $return["success"] = true;
         }
         break;
 }
