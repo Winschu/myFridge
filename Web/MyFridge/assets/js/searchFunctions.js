@@ -233,7 +233,7 @@ function createProducerListItem(articleItem) {
 /*
  *
  */
-function createUserListItem(articleItem) {
+function createUserListItem(articleItem, displayProducer) {
     var s = "";
 
     s += "<div class='card'>";
@@ -243,8 +243,8 @@ function createUserListItem(articleItem) {
     //Main box
     s += "<div class='p-6'>";
     s += "<a href='productDetail.php?articleName=" + encodeURIComponent(articleItem.name) + "'>" + articleItem.name + "</a>";
-
-    s += " (" + "<a href='producerList.php?producerName=" + encodeURIComponent(articleItem.producerName) + "'>" + articleItem.producerName + "</a>" + ")";
+    if(displayProducer)
+        s += " (" + "<a href='producerList.php?producerName=" + encodeURIComponent(articleItem.producerName) + "'>" + articleItem.producerName + "</a>" + ")";
 
     s += " (x" + articleItem.count + ")";
 
