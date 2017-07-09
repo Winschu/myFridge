@@ -12,22 +12,8 @@ function getSearchResult(searchTerm, startPos, rowCount) {
         rowCount: rowCount
     }).done(function (data) {
         if(data.success){
-            data = data.data;
-            for (var i = 0; i < data.length; i++) {
-                var article = {
-                    name: data[i].name,
-                    groupName: data[i].groupName,
-                    barcode: data[i].barcode,
-                    highestPrice: data[i].highestPrice,
-                    producerName: data[i].producerName,
-                    size: data[i].size,
-                    sizeType: data[i].sizeType,
-                    lastUpdate: data[i].lastUpdate
-                };
-                articleArray.push(article);
-            }
-            for (var j = 0; j < articleArray.length; j++) {
-                $("#articleList").append(createListItem(articleArray[j]));
+            for (var j = 0; j < data.data.length; j++) {
+                $("#articleList").append(createListItem(data.data[j], true));
             }
             JsBarcode(".barcode").init();
     }
@@ -80,21 +66,8 @@ function getProducerNameList() {
 function getAllArticlesByProducer(producerName) {
     $.post("/ajax.php?action=getAllArticlesByProducer", {producerName: producerName}).done(function (data) {
         if(data.success) {
-            data = data.data;
-            for (var i = 0; i < data.length; i++) {
-                var article = {
-                    name: data[i].name,
-                    groupName: data[i].groupName,
-                    barcode: data[i].barcode,
-                    highestPrice: data[i].highestPrice,
-                    size: data[i].size,
-                    sizeType: data[i].sizeType,
-                    lastUpdate: data[i].lastUpdate
-                };
-                articleArray.push(article);
-            }
-            for (var j = 0; j < articleArray.length; j++) {
-                $("#articleList").append(createUserListItem(articleArray[j], false));
+            for (var j = 0; j < data.data.length; j++) {
+                $("#articleList").append(createListItem(data.data[j], false));
             }
         }
     });
@@ -103,23 +76,8 @@ function getAllArticlesByProducer(producerName) {
 function getAllArticlesByUser(userName) {
     $.post("/ajax.php?action=getAllArticlesByUser", {name: userName}).done(function (data) {
         if(data.success) {
-            data = data.data;
-            for (var i = 0; i < data.length; i++) {
-                var article = {
-                    name: data[i].name,
-                    producerName: data[i].producerName,
-                    groupName: data[i].groupName,
-                    barcode: data[i].barcode,
-                    size: data[i].size,
-                    sizeType: data[i].sizeType,
-                    data: data[i].date,
-                    count: data[i].count,
-                    price: data[i].price
-                };
-                articleArray.push(article);
-            }
-            for (var j = 0; j < articleArray.length; j++) {
-                $("#articleList").append(createUserListItem(articleArray[j], true));
+            for (var j = 0; j < data.data.length; j++) {
+                $("#articleList").append(createListItem(data.data[j], true));
             }
         }
     });
@@ -137,56 +95,9 @@ function createSelectOption(d) {
 }
 
 /*
- * Listeneintrag für die Ausgabe der Suche erstellen
- */
-function createListItem(articleItem) {
-    var s = "";
-
-    s += "<div class='card'>";
-    s += "<div class='card-block'>";
-    s += "<div class='d-flex flex-wrap justify-content-between'>";
-
-    //Main box
-    s += "<div class='p-6'>";
-    s += "<a href='productDetail.php?articleName=" + encodeURIComponent(articleItem.name) + "'>" + articleItem.name + "</a>";
-
-    s += " (" + "<a href='producerList.php?producerName=" + encodeURIComponent(articleItem.producerName) + "'>" + articleItem.producerName + "</a>" + ")";
-
-    s += "<div class='d-flex flex-wrap justify-content-between'>";
-    s += "<div class='p-6'>";
-    s += articleItem.highestPrice;
-    s += "</div>";
-    s += "<div class='p-6'>";
-    s += articleItem.size + articleItem.sizeType;
-    s += "</div>";
-    s += "</div>";
-
-    s += "</div>";
-    //end of Main box
-
-    //Barcode
-    var barcodeType = null;
-    if (articleItem.barcode.length === 13)
-        barcodeType = "EAN13";
-    else if (articleItem.barcode.length === 8)
-        barcodeType = "EAN8";
-
-    if (barcodeType) {
-        s += "<div class='p-6'>";
-        s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
-        s += '</div>';
-
-        s += "</div>";
-        s += "</div>";
-        s += "</div>";
-    }
-    return s;
-}
-
-/*
  * Listeneintrag für die Ausgabe der Suche nach Herstellerprodukten erstellen
  */
-function createUserListItem(articleItem, displayProducer) {
+function createListItem(articleItem, displayProducer) {
     var s = "";
 
     s += "<div class='card'>";
@@ -196,14 +107,16 @@ function createUserListItem(articleItem, displayProducer) {
     //Main box
     s += "<div class='p-6'>";
     s += "<a href='productDetail.php?articleName=" + encodeURIComponent(articleItem.name) + "'>" + articleItem.name + "</a>";
-    if(displayProducer)
+    if(displayProducer && articleItem.producerName)
         s += " (" + "<a href='producerList.php?producerName=" + encodeURIComponent(articleItem.producerName) + "'>" + articleItem.producerName + "</a>" + ")";
 
-    s += " (x" + articleItem.count + ")";
+    if(articleItem.count)
+        s += " (x " + articleItem.count + ")";
 
     s += "<div class='d-flex flex-wrap justify-content-between'>";
     s += "<div class='p-6'>";
-    s += articleItem.price;
+    if(articleItem.highestPrice)
+        s += articleItem.highestPrice;
     s += "</div>";
     s += "<div class='p-6'>";
     s += articleItem.size + articleItem.sizeType;
