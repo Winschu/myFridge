@@ -52,6 +52,21 @@ SQL;
             throw new Exception(pg_last_error());
         }
 
+        $sql = <<<SQL
+INSERT INTO user_bio_data (size_in_meter, weight_in_kg, name, age_in_years)
+VALUES (0, 0, $1, 0)
+SQL;
+
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute(
+            $this->con, "", array($user)
+        ))
+        ) {
+            throw new Exception(pg_last_error());
+        }
+
         return pg_affected_rows($dbres);
     }
 
