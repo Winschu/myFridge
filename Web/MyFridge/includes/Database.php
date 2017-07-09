@@ -179,10 +179,10 @@ SQL;
     public function getAllArticlesByUser(string $name)
     {
         $sql = <<<SQL
-SELECT best_before_date, current_price, article_list.barcode AS barcode, user_name
+SELECT *
 FROM article_list
 JOIN article ON article.barcode = article_list.barcode
-WHERE user_name LIKE $1
+WHERE user_name = $1
 SQL;
 
         if (!(pg_prepare($this->con, "", $sql))) {
@@ -194,12 +194,16 @@ SQL;
         $return = array();
         while ($data = pg_fetch_object($dbres)) {
             $return[] = [
-                "name" => $data->name,
-                "groupName" => $data->group_name,
-                "highestPrice" => $data->highest_price,
-                "size" => $data->size,
-                "sizeType" => $data->size_type
-            ];
+				"name" => $data->name,
+				"groupName" => $data->group_name,
+				"producerName" => $data->producer_name,
+				"barcode" => $data->barcode,
+				"size" => $data->size,
+				"sizeType" => $data->size_type,
+				"date" => $data->best_before_date,
+				"count" => $data->count,
+				"price" => $data->current_price
+			];
         }
 
         return $return;
@@ -333,8 +337,10 @@ SQL;
         return pg_affected_rows($dbres);
     }
 
-    public function insertArticleInventory(string $user, string $date, float $price, int $count, int $barcode)
+    public function insertArticleInventory(string $user, string $date, float $price, int $count, string $barcode)
     {
+    	if(!preg_match("/^[0-9]+$/", $barcode))
+			throw new Exception("Barcode contains invalid characters");
         $sql = <<<SQL
 INSERT INTO article_list (user_name, best_before_date, current_price, count, barcode)
 VALUES ($1, $2, $3, $4, $5)

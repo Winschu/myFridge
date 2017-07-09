@@ -179,7 +179,7 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->insertArticleInventory(
-                @$_POST["name"] ?: "",
+                @$_SESSION["user"] ?: "",
                 @$_POST["date"] ?: "",
                 @$_POST["price"] ?: 0,
                 @$_POST["count"] ?: 0,
