@@ -8,7 +8,7 @@ $dbCon = new dbCredentials();
 $userName = $_POST["userName"];
 
 $pgCon = pg_connect($dbCon->getDBString());
-$returnValue = [];
+$returnValue = null;
 $result = pg_query($pgCon, "
 SELECT user_name, email, size_in_meter, weight_in_kg, age_in_years
 FROM user_data
@@ -21,8 +21,8 @@ if (!$result) {
     exit;
 }
 while ($data = pg_fetch_object($result)) {
-    $returnValue[] = [
-        "username" => $data->user_name,
+    $returnValue = [
+        "user" => $data->user_name,
         "email" => $data->email,
         "size" => $data->size_in_meter,
         "weight" => $data->weight_in_kg,
