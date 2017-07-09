@@ -155,15 +155,23 @@ function createListItem(articleItem) {
     //end of Main box
 
     //Barcode
-    s += "<div class='p-6'>";
-    s += "<svg class='barcode' jsbarcode-height='20' jsbarcode-format='EAN13' jsbarcode-value='" + articleItem.barcode + "' jsbarcode-textmargin='0' jsbarcode-fontoptions='bold'></svg>";
-    s += "</div>";
+    var barcodeType = null;
+    if(articleItem.barcode.length === 13)
+        barcodeType = "EAN13";
+    else if (articleItem.barcode.length === 8)
+        barcodeType = "EAN8";
 
-    s += "</div>";
-    s += "</div>";
-    s += "</div>";
+    if(barcodeType) {
+        s += "<div class='p-6'>";
+        s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
+        s += '</div>';
 
-    JsBarcode(".barcode").init();
+        s += "</div>";
+        s += "</div>";
+        s += "</div>";
+
+        JsBarcode(".barcode").init();
+    }
     return s;
 }
 
