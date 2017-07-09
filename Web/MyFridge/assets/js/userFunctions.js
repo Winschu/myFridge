@@ -51,3 +51,40 @@ function addArticleToInventory(obj) {
         }
     });
 }
+
+function changeArticleInventory(obj) {
+    $.post("../../includes/ajax/changeArticleInventory.php", {user : obj.user, count : obj.count, barcode : obj.barcode}).done(function (data) {
+        if(data) {
+            alert("Anzahl wurde geändert");
+        }
+        else
+        {
+            alert("Artikel konnte nicht geändert werde");
+        }
+    });
+}
+
+function deleteArticleInventory(obj) {
+    $.post("../../includes/ajax/deleteArticleInventory.php", {user : obj.user, barcode : obj.barcode}).done(function (data) {
+        if(data) {
+            alert("Artikel wurde entfernt");
+        }
+        else
+        {
+            alert("Artikel konnte nicht entfernt werden");
+        }
+    });
+}
+
+/*
+ * Gibt Benutzer mit gegebenem Benutzernamen zurück
+ */
+function getSpecificUser(userName) {
+    $.post("includes/ajax/getSpecificUser.php", {userName: userName}).done(function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var userData = {
+                user : data[i]
+            }
+        }
+    });
+}

@@ -1,5 +1,8 @@
 <?php
 require_once("config.php");
+if (!isset($_SESSION["user"])) {
+    header('Location: http://localhost/index.php');
+}
 require_once("includes/loadAssets.html");
 require_once("includes/dbCredentials.php");
 require_once("includes/articleObject.php");
@@ -31,6 +34,12 @@ WHERE name = '$articleName'
         $(document).ready(function () {
             getSessionState();
             var user = "<?php echo $_SESSION["user"]; ?>";
+
+            /*
+             * if article in inventory
+             * show Change/Delete
+             */
+
             $("#addInventoryButton").click(function () {
                 var formArray = $("#articleToInventoryForm").serializeArray();
                 var inventoryEntry =
@@ -43,6 +52,24 @@ WHERE name = '$articleName'
                     };
 
                 addArticleToInventory(inventoryEntry);
+            });
+
+            $("#changeArticleButton").click(function () {
+                var formArray = $("#changeArticleInventoryForm").serializeArray();
+                var inventoryEntry = {
+                    count: formArray[0].value,
+                    user: user,
+                    barcode: "<?php echo $article->getArticleBarcode(); ?>"
+                };
+                changeArticleInventory(inventoryEntry);
+            });
+
+            $("#deleteInventoryButton").click(function () {
+                var inventoryEntry = {
+                    user: user,
+                    barcode: "<?php echo $article->getArticleBarcode(); ?>"
+                };
+                deleteArticleInventory(inventoryEntry);
             });
         });
     </script>
@@ -95,17 +122,17 @@ WHERE name = '$articleName'
                     <div class="p-4">
                         MHD oder MVD
                         <input type="date" class="form-control" name="dateInput" id="dateInput"
-                               placeholder="Artikelname eintragen...">
+                               placeholder="MHD eintragen...">
                     </div>
                     <div class="p-4">
                         Kaufpreis
                         <input type="number" class="form-control" name="priceInput" id="priceInput"
-                               placeholder="Artikelname eintragen...">
+                               placeholder="Kaufpreis eintragen...">
                     </div>
                     <div class="p-4">
                         Anzahl
                         <input type="number" class="form-control" name="countInput" id="countInput"
-                               placeholder="Artikelname eintragen...">
+                               placeholder="Anzahl eintragen...">
                     </div>
                 </div>
             </form>
@@ -113,6 +140,38 @@ WHERE name = '$articleName'
                 <div class="p-12">
                     <button type="button" class="btn btn-primary" name="addInventoryButton" id="addInventoryButton"
                             style="padding: 5px; cursor: pointer;">In das Lager packen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Falls Artikel sich bereits im Inventar des Nutzers befindet -->
+    <div class="card" style="display:none;">
+        <h2 class="card-header text-center" id="changeArticleInventoryHeader">
+            Artikel ändern
+        </h2>
+        <div class="card-text">
+            <div class="d-flex flex-wrap justify-content-center">
+                <div class="p-12">
+                    <form role="form" id="changeArticleInventoryForm" name="articleToInventoryForm" method="post"
+                          enctype="multipart/form-data">
+                        Anzahl
+                        <input type="number" class="form-control" name="changeCountInput" id="changeCountInput"
+                               placeholder="Anzahl eintragen..." value="">
+                    </form>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap justify-content-around">
+                <div class="p-6">
+                    <button type="button" class="btn btn-primary" name="changeInventoryButton"
+                            id="changeInventoryButton"
+                            style="padding: 5px; cursor: pointer;">Anzahl des Artikel ändern
+                    </button>
+                </div>
+                <div class="p-6">
+                    <button type="button" class="btn btn-primary" name="deleteInventoryButton"
+                            id="deleteInventoryButton"
+                            style="padding: 5px; cursor: pointer;">Artikel aus dem Inventar entfernen
                     </button>
                 </div>
             </div>

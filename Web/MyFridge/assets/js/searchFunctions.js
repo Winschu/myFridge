@@ -66,15 +66,6 @@ function getProducerNameList() {
 }
 
 /*
- * Gibt Benutzer mit gegebenem Benutzernamen zurück
- */
-function getSpecificUser(userName) {
-    $.post("includes/ajax/getSpecificUser.php", {userName: userName}).done(function (data) {
-        //TODO: Irgendwas übergeben lassen
-    });
-}
-
-/*
  * Gibt alle Artikel eines Herstellers zurück
  */
 function getAllArticlesByProducer(producerName) {
@@ -204,15 +195,21 @@ function createProducerListItem(articleItem) {
     //end of Main box
 
     //Barcode
-    s += "<div class='p-6'>";
-    s += "<svg class='barcode' jsbarcode-height='20' jsbarcode-format='EAN13' jsbarcode-value='" + articleItem.barcode + "' jsbarcode-textmargin='0' jsbarcode-fontoptions='bold'></svg>";
-    s += "</div>";
+    var barcodeType = null;
+    if(articleItem.barcode.length === 13)
+        barcodeType = "EAN13";
+    else if (articleItem.barcode.length === 8)
+        barcodeType = "EAN8";
 
-    s += "</div>";
-    s += "</div>";
-    s += "</div>";
+    if(barcodeType) {
+        s += "<div class='p-6'>";
+        s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
+        s += '</div>';
 
-    JsBarcode(".barcode").init();
+        s += "</div>";
+        s += "</div>";
+        s += "</div>";
+    }
     return s;
 }
 
@@ -247,24 +244,20 @@ function createUserListItem(articleItem) {
     //end of Main box
 
     //Barcode
-    s += "<div class='p-6'>";
-    s += "<svg class='barcode' jsbarcode-height='20' jsbarcode-format='EAN13' jsbarcode-value='" + articleItem.barcode + "' jsbarcode-textmargin='0' jsbarcode-fontoptions='bold'></svg>";
-    s += "</div>";
+    var barcodeType = null;
+    if(articleItem.barcode.length === 13)
+        barcodeType = "EAN13";
+    else if (articleItem.barcode.length === 8)
+        barcodeType = "EAN8";
 
-    s += "</div>";
-    s += "</div>";
-    s += "</div>";
+    if(barcodeType) {
+        s += "<div class='p-6'>";
+        s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
+        s += '</div>';
 
-    JsBarcode(".barcode").init();
+        s += "</div>";
+        s += "</div>";
+        s += "</div>";
+    }
     return s;
-}
-
-/*
- * Link encoden
- */
-function linkEncoder(link) {
-    $.post("../../includes/ajax/linkEncoder.php", {link: link}).then(function (data) {
-        console.log(data);
-        return data;
-    });
 }

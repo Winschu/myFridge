@@ -5,7 +5,6 @@ require_once("includes/loadAssets.html");
 <head>
     <script>
         $(document).ready(function () {
-            //TODO: Müsste noch eingestellt werden wie die Abfragen auf Eingabe überprüft werden sollen
             getArticleGroupList();
             getProducerNameList();
 
