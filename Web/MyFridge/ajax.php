@@ -140,6 +140,18 @@ switch ($action) {
             $return["errorMsg"] = $e->getMessage();
         }
         break;
+    case "changeArticleInventory":
+        //TODO: changeArticleInventory verbinden
+        break;
+    case "insertNewArticle":
+        //TODO: insertNewArticle verbinden
+        break;
+    case "InsertArticleInventory":
+        //TODO: insertArticleToInventory verbinden
+        break;
+    case "deleteArticleInventory":
+        //TODO: deleteArticleInventory verbinden
+        break;
 }
 
 echo json_encode($return);

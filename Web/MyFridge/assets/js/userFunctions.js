@@ -25,7 +25,7 @@ function sendRegisterData(obj) {
 }
 
 function getSessionState() {
-    $.post("ajax.php?action=sessionState").done(function (data) {
+    $.post("/ajax.php?action=sessionState").done(function (data) {
         if (data.success) {
             $("#loginPage").hide();
             $("#registerPage").hide();
@@ -38,8 +38,7 @@ function getSessionState() {
 }
 
 function addArticleToInventory(obj) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/insertArticleToInventory.php", {
+    $.post("/ajax.php?action=InsertArticleInventory", {
         user: obj.user,
         date: obj.date,
         price: obj.price,
@@ -56,8 +55,7 @@ function addArticleToInventory(obj) {
 }
 
 function changeArticleInventory(obj) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/changeArticleInventory.php", {
+    $.post("/ajax.php?action=changeArticleInventory", {
         user: obj.user,
         count: obj.count,
         barcode: obj.barcode
@@ -72,8 +70,7 @@ function changeArticleInventory(obj) {
 }
 
 function deleteArticleInventory(obj) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/deleteArticleInventory.php", {
+    $.post("/ajax.php?action=deleteArticleInventory", {
         user: obj.user,
         barcode: obj.barcode
     }).done(function (data) {
@@ -90,8 +87,7 @@ function deleteArticleInventory(obj) {
  * Gibt Benutzer mit gegebenem Benutzernamen zurück
  */
 function getSpecificUser(userName) {
-    //TODO: Auf ajax ändern
-    $.post("includes/ajax/getSpecificUser.php", {userName: userName}).done(function (data) {
+    $.post("/ajax.php?action=getSpecificUser", {userName: userName}).done(function (data) {
         var userData = {
             user: data.user,
             email: data.email,

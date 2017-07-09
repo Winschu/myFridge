@@ -6,8 +6,7 @@ var producerArray = [];
  * Gibt Suchergebnisse die auf den Suchbegriff passen zurück und grenzt die Ausgabe auf die gegebenen Parameter ein
  */
 function getSearchResult(searchTerm, startPos, rowCount) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/getAllArticles.php", {
+    $.post("/ajax.php?action=getAllArticles", {
         searchTerm: searchTerm,
         startPos: startPos,
         rowCount: rowCount
@@ -36,7 +35,7 @@ function getSearchResult(searchTerm, startPos, rowCount) {
  * Gibt alle Artikelgruppen in der Datenbank zurück
  */
 function getArticleGroupList() {
-    $.get("../../includes/ajax/getAllArticleGroup.php").done(function (data) {
+    $.get("/ajax.php?action=getAllArticleGroup").done(function (data) {
         for (var i = 0; i < data.length; i++) {
             var articleGroup = {
                 name: data[i].name
@@ -53,7 +52,7 @@ function getArticleGroupList() {
  * Gibt alle Hersteller in der Datenbank zurück
  */
 function getProducerNameList() {
-    $.get("../../includes/ajax/getAllProducer.php").done(function (data) {
+    $.get("/ajax.php?action=getAllProducer").done(function (data) {
         for (var i = 0; i < data.length; i++) {
             var producer = {
                 name: data[i].name
@@ -70,8 +69,7 @@ function getProducerNameList() {
  * Gibt alle Artikel eines Herstellers zurück
  */
 function getAllArticlesByProducer(producerName) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/getAllArticlesByProducer.php", {producerName: producerName}).done(function (data) {
+    $.post("/ajax.php?action=getAllArticlesByProducer", {producerName: producerName}).done(function (data) {
         for (var i = 0; i < data.length; i++) {
             var article = {
                 name: data[i].name,
@@ -91,8 +89,7 @@ function getAllArticlesByProducer(producerName) {
 }
 
 function getAllArticlesByUser(userName) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/getAllArticlesByUser.php", {name: userName}).done(function (data) {
+    $.post("/ajax.php?action=getAllArticlesByUser", {name: userName}).done(function (data) {
         for (var i = 0; i < data.length; i++) {
             var article = {
                 name: data[i].name,

@@ -1,6 +1,5 @@
 function insertNewArticle(obj) {
-    //TODO: Auf ajax ändern
-    $.post("../../includes/ajax/insertNewArticle.php",
+    $.post("/ajax.php?action=insertNewArticle",
         {
             name : obj.name,
             articleGroup : obj.articleGroup,
