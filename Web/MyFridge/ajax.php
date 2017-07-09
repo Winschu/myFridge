@@ -63,7 +63,7 @@ switch ($action) {
         $return["action"] = $action;
         try {
             $return["data"] = $db->getAllArticles(
-                @$_POST["searchTerm"] ?: "%",
+                @$_POST["searchTerm"] ? "%" . $_POST["searchTerm"] . "%" : "%",
                 @$_POST["startPos"] ?: 0,
                 @$_POST["rowCount"] ?: 30
             );
