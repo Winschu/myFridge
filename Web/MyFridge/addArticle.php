@@ -1,4 +1,8 @@
 <?php
+require_once("config.php");
+if (!isset($_SESSION["user"])) {
+    header('Location: http://localhost/index.php');
+}
 require_once("includes/loadAssets.html");
 ?>
 <html>
