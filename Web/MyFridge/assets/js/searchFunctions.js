@@ -27,6 +27,7 @@ function getSearchResult(searchTerm, startPos, rowCount) {
         for (var j = 0; j < articleArray.length; j++) {
             $("#articleList").append(createListItem(articleArray[j]));
         }
+        JsBarcode(".barcode").init();
     });
 }
 
@@ -169,8 +170,6 @@ function createListItem(articleItem) {
         s += "</div>";
         s += "</div>";
         s += "</div>";
-
-        JsBarcode(".barcode").init();
     }
     return s;
 }
