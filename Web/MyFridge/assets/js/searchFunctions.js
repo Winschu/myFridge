@@ -6,6 +6,7 @@ var producerArray = [];
  * Gibt Suchergebnisse die auf den Suchbegriff passen zurück und grenzt die Ausgabe auf die gegebenen Parameter ein
  */
 function getSearchResult(searchTerm, startPos, rowCount) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/getAllArticles.php", {
         searchTerm: searchTerm,
         startPos: startPos,
@@ -69,6 +70,7 @@ function getProducerNameList() {
  * Gibt alle Artikel eines Herstellers zurück
  */
 function getAllArticlesByProducer(producerName) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/getAllArticlesByProducer.php", {producerName: producerName}).done(function (data) {
         for (var i = 0; i < data.length; i++) {
             var article = {
@@ -89,11 +91,12 @@ function getAllArticlesByProducer(producerName) {
 }
 
 function getAllArticlesByUser(userName) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/getAllArticlesByUser.php", {name: userName}).done(function (data) {
         for (var i = 0; i < data.length; i++) {
             var article = {
                 name: data[i].name,
-                producerName : data[i].producerName,
+                producerName: data[i].producerName,
                 groupName: data[i].groupName,
                 barcode: data[i].barcode,
                 size: data[i].size,
@@ -151,12 +154,12 @@ function createListItem(articleItem) {
 
     //Barcode
     var barcodeType = null;
-    if(articleItem.barcode.length === 13)
+    if (articleItem.barcode.length === 13)
         barcodeType = "EAN13";
     else if (articleItem.barcode.length === 8)
         barcodeType = "EAN8";
 
-    if(barcodeType) {
+    if (barcodeType) {
         s += "<div class='p-6'>";
         s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
         s += '</div>';
@@ -196,12 +199,12 @@ function createProducerListItem(articleItem) {
 
     //Barcode
     var barcodeType = null;
-    if(articleItem.barcode.length === 13)
+    if (articleItem.barcode.length === 13)
         barcodeType = "EAN13";
     else if (articleItem.barcode.length === 8)
         barcodeType = "EAN8";
 
-    if(barcodeType) {
+    if (barcodeType) {
         s += "<div class='p-6'>";
         s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
         s += '</div>';
@@ -245,12 +248,12 @@ function createUserListItem(articleItem) {
 
     //Barcode
     var barcodeType = null;
-    if(articleItem.barcode.length === 13)
+    if (articleItem.barcode.length === 13)
         barcodeType = "EAN13";
     else if (articleItem.barcode.length === 8)
         barcodeType = "EAN8";
 
-    if(barcodeType) {
+    if (barcodeType) {
         s += "<div class='p-6'>";
         s += '<svg class="barcode" jsbarcode-height="20" jsbarcode-format="' + barcodeType + '" jsbarcode-value="' + articleItem.barcode + '" jsbarcode-textmargin="0" jsbarcode-fontoptions="bold"></svg>';
         s += '</div>';

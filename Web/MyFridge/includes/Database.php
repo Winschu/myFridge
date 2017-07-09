@@ -244,14 +244,40 @@ SQL;
         return $return;
     }
 
-    public function changeUserData()
+    public function changeUserData(string $user, float $size, float $weigth, int $age)
     {
+        $sql = <<<SQL
+UPDATE user_bio_data
+SET size_in_meter = $2, weight_in_kg = $3, age_in_years = $4
+WHERE name LIKE $1
+SQL;
 
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute($this->con, "", array($user, $size, $weigth, $age)))) {
+            throw new Exception(pg_last_error());
+        }
+
+        return pg_affected_rows($dbres);
     }
 
-    public function changeUserEmail()
+    public function changeUserEmail(string $user, string $email)
     {
+        $sql = <<<SQL
+UPDATE user_data
+SET email = $2
+WHERE user_name LIKE $1
+SQL;
 
+        if (!(pg_prepare($this->con, "", $sql))) {
+            throw new Exception(pg_last_error());
+        }
+        if (!($dbres = pg_execute($this->con, "", array($user, $email)))) {
+            throw new Exception(pg_last_error());
+        }
+
+        return pg_affected_rows($dbres);
     }
 
 }

@@ -61,7 +61,7 @@ require_once("includes/loadAssets.html");
                         </div>
                         <div class="p-6">
                             <span id="userWeightText">WEIGHT</span>
-                            <input type="number" class="form-control" name="weightInput" id="weightInput"
+                            <input type="number" class="form-control" name="weigthInput" id="weigthInput"
                                    placeholder="Gewicht eintragen" value="">
                         </div>
                         <div class="p-6">
@@ -83,7 +83,7 @@ require_once("includes/loadAssets.html");
                         <span>E-Mail Adresse ändern</span>
                         <div class="p-6">
                             <span id="emailAddressText">EMAIL</span>
-                            <input type="email" class="form-control" name="emailAdressInput" id="emailAddressInput"
+                            <input type="email" class="form-control" name="emailAdressInput" id="emailAdressInput"
                                    placeholder="E-Mail Adresse eintragen..." value="">
                         </div>
                     </div>

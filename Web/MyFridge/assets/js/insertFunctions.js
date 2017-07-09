@@ -1,4 +1,5 @@
 function insertNewArticle(obj) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/insertNewArticle.php",
         {
             name : obj.name,

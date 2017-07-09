@@ -38,6 +38,7 @@ function getSessionState() {
 }
 
 function addArticleToInventory(obj) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/insertArticleToInventory.php", {
         user: obj.user,
         date: obj.date,
@@ -55,6 +56,7 @@ function addArticleToInventory(obj) {
 }
 
 function changeArticleInventory(obj) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/changeArticleInventory.php", {
         user: obj.user,
         count: obj.count,
@@ -70,6 +72,7 @@ function changeArticleInventory(obj) {
 }
 
 function deleteArticleInventory(obj) {
+    //TODO: Auf ajax ändern
     $.post("../../includes/ajax/deleteArticleInventory.php", {
         user: obj.user,
         barcode: obj.barcode
@@ -87,6 +90,7 @@ function deleteArticleInventory(obj) {
  * Gibt Benutzer mit gegebenem Benutzernamen zurück
  */
 function getSpecificUser(userName) {
+    //TODO: Auf ajax ändern
     $.post("includes/ajax/getSpecificUser.php", {userName: userName}).done(function (data) {
         var userData = {
             user: data.user,
@@ -103,13 +107,25 @@ function getSpecificUser(userName) {
 }
 
 function changeUserData(obj) {
-    $.post("", {user: obj.user, size: obj.size, weight: obj.weight, age: obj.weight}).done(function (data) {
-
+    $.post("/ajax.php?action=changeUserData", {user: obj.user, size: obj.size, weigth: obj.weigth, age: obj.age}).done(function (data) {
+        if(data) {
+            alert("Daten wurden erfolgreich geändert!");
+        }
+        else
+        {
+            alert("Daten konnten nicht geändert werden");
+        }
     });
 }
 
 function changeEmail(obj) {
-    $.post("", {user: obj.user, email: obj.email}).done(function () {
-
+    $.post("/ajax.php?action=changeUserEmail", {user: obj.user, email: obj.email}).done(function (data) {
+        if(data) {
+            alert("E-Mail Adresse wurde erfolgreich geändert!");
+        }
+        else
+        {
+            alert("E-Mail Adresse konnte nicht geändert werden!");
+        }
     });
 }
