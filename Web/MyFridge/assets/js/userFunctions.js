@@ -103,9 +103,13 @@ function getSpecificUser(userName) {
 }
 
 function changeUserData(obj) {
+    $.post("", {user: obj.user, size: obj.size, weight: obj.weight, age: obj.weight}).done(function (data) {
 
+    });
 }
 
 function changeEmail(obj) {
+    $.post("", {user: obj.user, email: obj.email}).done(function () {
 
+    });
 }
