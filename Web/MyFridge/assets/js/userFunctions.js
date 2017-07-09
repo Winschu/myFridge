@@ -24,20 +24,6 @@ function sendRegisterData(obj) {
     });
 }
 
-function getSessionState() {
-    $.post("/ajax.php?action=sessionState").done(function (data) {
-        if (data.success) {
-            $("#loginPage").hide();
-            $("#registerPage").hide();
-            return true;
-        }
-        else {
-            $("#userSettingsPage").hide();
-            return false;
-        }
-    });
-}
-
 function addArticleToInventory(obj) {
     $.post("/ajax.php?action=InsertArticleInventory", {
         user: obj.user,
